@@ -28,6 +28,23 @@ Tasks will be managed by issues within this repository. They'll be broken down a
 
 Lets get to it.
 
+## Layout
+
+```bash
+/project-root
+├── /blog
+│   └── (Jekyll files [ReadMe](/blog/README.md))
+├── /site
+│   ├── /assets
+│   │   └── (Raw production files)
+│   ├── /sauce
+│   │   └── (Vue 3 and Vite source files)
+│   └── (Vite / Vue 3 related [ReadMe](/site/README.md))
+├── /shared
+│   └── (Shared files and components)
+└── (This ReadMe)
+```
+
 ## Jekyll Installation
 
 Installing Jekyll can be a pain so I've included it here.
