@@ -24,12 +24,13 @@ description: >- # this means to ignore newlines until "baseurl:"
   aroni.co is the musings and echos of a human named Aroni.
   In a small blip of time, in a little space called Kyoto, he writes.
 baseurl: '/blog' # the subpath of your site, e.g. /blog
-url: 'aroni.co' # the base hostname & protocol for your site, e.g. http://example.com
+url: 'https://aroni.co' # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: aronikun
 github_username: aronikun
+gitlab_username: aronikun
 
 # Build settings
-theme: minima
+
 plugins:
   - jekyll-feed
 # Exclude from processing.
@@ -40,7 +41,10 @@ plugins:
 # Excluded items can be processed by explicitly listing the directories or
 # their entries' file path in the `include:` list.
 #
-# exclude:
+exclude:
+  - _posts/.obsidian/
+  - _drafts/.obsidian/
+  - _drafts/templates/
 #   - .sass-cache/
 #   - .jekyll-cache/
 #   - gemfiles/
