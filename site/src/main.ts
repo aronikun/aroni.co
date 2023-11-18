@@ -1,5 +1,7 @@
 import { createApp } from 'vue'
-import './style.css'
-import App from './App.vue'
+import Main from './Main.vue'
+import './main.css'
+import { router } from './router'
 
-createApp(App).mount('#app')
+const app = createApp(Main).use(router)
+app.mount('#aroni')
