@@ -33,6 +33,8 @@ const doTrick = () => {
     logo.classList.add(trick);
   }
 };
+
+
 </script>
 
 <template>
@@ -41,7 +43,6 @@ const doTrick = () => {
       <div class="logo" :class="{ '': isTrick }" @click="doTrick">
         <img src="../assets/svg/logo.svg" class="logo-svg">
       </div>
-      <p class="soon">🏗️ Under Construction🏗️</p>
     </div>
   </div>
 </template>
@@ -61,13 +62,15 @@ const doTrick = () => {
     align-items: center;
   }
   .drop-in {
-    animation: drop-in 3s cubic-bezier(.24,-0.01,.1,1.13) .5s;
+    animation: drop-in 3s cubic-bezier(.24,-0.01,.1,1.13);
     text-align: center;
   }
   @keyframes drop-in {
     0% { opacity: 0; transform: translateY(-60vh); }
-    20% { opacity: 0; transform: translateY(-60vh); }
-    100% { opacity: 1; }
+    30% { opacity: 0; transform: translateY(-60vh); }
+    70% { opacity: 1; transform: translateY(1vh); }
+    90% { opacity: 1; transform: translateY(-2vh); }
+    100% { opacity: 1; transform: translateY(0vh) }
   }
   .logo {
     opacity: 1;
@@ -78,7 +81,7 @@ const doTrick = () => {
     min-height: 16px;
     max-height: 96px;
   }
-  .soon {
+/*  .soon {
     transform: translateY(-10px);
     transition: all 1s ease-out;
     opacity: 0;
@@ -88,7 +91,7 @@ const doTrick = () => {
     transform: translateY(0px);
     transition: all .4s ease-out;
   }
-
+*/
 
   /* All the tricks */
 
