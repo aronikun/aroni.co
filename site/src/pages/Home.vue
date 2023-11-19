@@ -118,7 +118,7 @@ const doTrick = () => {
     animation: kickflip 1s cubic-bezier(.34,-0.3,.67,1.25);
   }
   @keyframes kickflip {
-    0% {transform: rotate(0deg) translateY(0px);}
+    0% {transform: rotate(0deg) rotate3d(1,0,0,0deg) translateY(0px);}
     20% {transform: rotate(-5deg) rotate3d(1,0,0,0deg) translateY(20px);}
     21% {transform: rotate(-5deg) rotate3d(1,0,0,0deg) translateY(20px);}
     100% {transform: rotate(0deg) rotate3d(1,0,0,360deg) translateY(0px);}
@@ -177,25 +177,16 @@ const doTrick = () => {
     animation: varial-kickflip 1s cubic-bezier(.34,-0.3,.67,1.25);
   }
   @keyframes varial-kickflip {
-    0% {transform: rotate(-0deg) translateY(0px);}
+    0% {transform: rotate(0deg) rotate3d(1,0,0,0deg) translateY(0px);}
     20% {transform: rotate(-10deg) rotate3d(1,0,0,0deg) translateY(20px);}
     21% {transform: rotate(-10deg) rotate3d(1,0,0,0deg) translateY(20px);}
-    100% {transform: rotate(-0deg) rotate3d(1,1,1,360deg) translateY(0px);}
-  }
-  .logo.varial-kickflip {
-    animation: varial-kickflip 1s cubic-bezier(.34,-0.3,.67,1.25);
-  }
-  @keyframes varial-kickflip {
-    0% {transform: rotate(-0deg) translateY(0px);}
-    20% {transform: rotate(-10deg) rotate3d(1,0,0,0deg) translateY(20px);}
-    21% {transform: rotate(-10deg) rotate3d(1,0,0,0deg) translateY(20px);}
-    100% {transform: rotate(-0deg) rotate3d(1,1,1,360deg) translateY(0px);}
+    100% {transform: rotate(0deg) rotate3d(1,1,1,360deg) translateY(0px);}
   }
   .logo.laserflip {
     animation: laserflip 1.6s cubic-bezier(.34,-0.3,.67,1.25);
   }
   @keyframes laserflip {
-    0% {transform: rotate(-0deg) translateY(0px);}
+    0% {transform: rotate(0deg) rotate3d(1,0,0,360deg) translateY(0px);}
     20% {transform: rotate(-10deg) rotate3d(0,1,0,360deg) translateY(20px);}
     21% {transform: rotate(-10deg) rotate3d(0,1,0,360deg) translateY(20px);}
     100% {transform: rotate(-360deg) rotate3d(0,1,1,0deg) translateY(0px);}
