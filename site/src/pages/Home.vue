@@ -1,135 +1,196 @@
-<script lang="ts">
+<script setup lang="ts">
+import { ref } from 'vue';
 
+const isTrick = ref(false);
+const lastTrick = ref('');
+
+const tricks = [
+  'ollie',
+  'kickflip',
+  'big-ollie',
+  'shove-it-180',
+  'shove-it-360',
+  'ollie-nose-slide',
+  'varial-kickflip',
+  'laserflip',
+  'nollie-heel-slide',
+];
+
+const doTrick = () => {
+  let trick = '';
+  
+  do {
+    const rando = Math.floor(Math.random() * tricks.length);
+    trick = tricks[rando];
+  } while (trick === lastTrick.value);
+
+  lastTrick.value = trick;
+  isTrick.value = !isTrick.value;
+
+  const logo = document.querySelector('.logo');
+  if (logo) {
+    logo.classList.remove(...tricks);
+    logo.classList.add(trick);
+  }
+};
 </script>
 
 <template>
   <div class="wrapper">
-    <div class="logo">
-      <img src="../assets/svg/logo-bg.svg" class="logo-bg">
-      <img src="../assets/svg/logo-a.svg" class="logo-64 logo-a">
-      <img src="../assets/svg/logo-r.svg" class="logo-64 logo-r">
-      <img src="../assets/svg/logo-o.svg" class="logo-64 logo-o">
-      <img src="../assets/svg/logo-n.svg" class="logo-64 logo-n">
-      <img src="../assets/svg/logo-i.svg" class="logo-16 logo-i">
-      <img src="../assets/svg/logo-dot.svg" class="logo-16 logo-dot-i">
-      <img src="../assets/svg/logo-dot.svg" class="logo-16 logo-dot">
-      <img src="../assets/svg/logo-c.svg" class="logo-64 logo-c">
-      <img src="../assets/svg/logo-o.svg" class="logo-64 logo-co">
+    <div class="drop-in">
+      <div class="logo" :class="{ '': isTrick }" @click="doTrick">
+        <img src="../assets/svg/logo.svg" class="logo-svg">
+      </div>
+      <p class="soon">🏗️ Under Construction🏗️</p>
     </div>
   </div>
 </template>
 
 <style scoped>
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+  p {
+    font-family: 'Bebas Neue';
+    font-size: clamp(1rem, 10vw, 2rem);
+    margin: 0;
+  }
   .wrapper {
+    height: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    width: 100vw;
+    align-items: center;
+  }
+  .drop-in {
+    animation: drop-in 3s cubic-bezier(.24,-0.01,.1,1.13) .5s;
+    text-align: center;
+  }
+  @keyframes drop-in {
+    0% { opacity: 0; transform: translateY(-60vh); }
+    20% { opacity: 0; transform: translateY(-60vh); }
+    100% { opacity: 1; }
   }
   .logo {
-    transform: translateX(-176px);
+    opacity: 1;
+    cursor: pointer;
   }
-  .logo-bg {
-    height: 96px;
+  .logo-svg {
+    width: 100%;
+    min-height: 16px;
+    max-height: 96px;
+  }
+  .soon {
+    transform: translateY(-10px);
+    transition: all 1s ease-out;
+    opacity: 0;
+  }
+  .logo:hover ~ .soon {
+    opacity: .2;
+    transform: translateY(0px);
+    transition: all .4s ease-out;
+  }
+
+
+  /* All the tricks */
+
+
+  .logo.kickflip {
+    animation: kickflip 1s cubic-bezier(.34,-0.3,.67,1.25);
+  }
+  @keyframes kickflip {
+    0% {transform: rotate(0deg) translateY(0px);}
+    20% {transform: rotate(-5deg) rotate3d(1,0,0,0deg) translateY(20px);}
+    21% {transform: rotate(-5deg) rotate3d(1,0,0,0deg) translateY(20px);}
+    100% {transform: rotate(0deg) rotate3d(1,0,0,360deg) translateY(0px);}
+  }
+  .logo.ollie {
+    animation: ollie 1s cubic-bezier(.34,-0.3,.67,1.25);
+  }
+  @keyframes ollie {
+    0% {transform: rotate(0deg) translateY(0px);}
+    20% {transform: rotate(-5deg) translateY(20px);}
+    21% {transform: rotate(-5deg) translateY(20px);}
+    60% {transform: rotate(0deg) translateY(-40px);}
+    100% {transform: rotate(0deg) translateY(0px);}
+  }
+  .logo.big-ollie {
+    animation: big-ollie 1.5s cubic-bezier(.34,-0.3,.67,1.25);
+  }
+  @keyframes big-ollie {
+    0% {transform: rotate(0deg) translateY(0px);}
+    40% {transform: rotate(-5deg) translateY(20px);}
+    41% {transform: rotate(-5deg) translateY(20px);}
+    60% {transform: rotate(3deg) translateY(-100px);}
+    100% {transform: rotate(0deg) translateY(0px);}
+  }
+  .logo.shove-it-180 {
+    animation: shove-it-180 1.8s cubic-bezier(.34,-0.3,.67,1.25);
+  }
+  @keyframes shove-it-180 {
+    0% {transform: rotate(0deg);}
+    40% {transform: rotate(180deg);}
+    60% {transform: rotate(180deg);}
+    100% {transform: rotate(360deg);}
+  }
+  .logo.shove-it-360 {
+    animation: shove-it-360 1s cubic-bezier(.34,-0.3,.67,1.25);
+  }
+  @keyframes shove-it-360 {
+    0% {transform: rotate(0deg);}
+    20% {transform: rotate(20deg);}
+    21% {transform: rotate(20deg);}
+    100% {transform: rotate(-360deg);}
+  }
+  .logo.ollie-nose-slide {
+    animation: ollie-nose-slide 2s cubic-bezier(.34,-0.3,.67,1.25);
     transform-origin: right;
-    transform: translate(352px, 16px);
-    animation: logo-bg 30s ease-in-out;
   }
-
-  @keyframes logo-bg {
-    0% { transform: scale(0) translate(352px, 16px); }
-    1% { transform: scale(1) translate(352px, 16px); }
+  @keyframes ollie-nose-slide {
+    0% {transform: rotate(0deg) translateY(0px);}
+    10% {transform: rotate(-5deg) translateY(20px);}
+    11% {transform: rotate(-5deg) translateY(20px);}
+    30% {transform: rotate(20deg) translateY(-20px);}
+    77% {transform: rotate(18deg) translateY(-15px);}
+    100% {transform: rotate(0deg) translateY(0px);}
   }
-
-  .logo-16 {
-    width: 16px;
+  .logo.varial-kickflip {
+    animation: varial-kickflip 1s cubic-bezier(.34,-0.3,.67,1.25);
   }
-  .logo-64 {
-    width: 64px;
+  @keyframes varial-kickflip {
+    0% {transform: rotate(-0deg) translateY(0px);}
+    20% {transform: rotate(-10deg) rotate3d(1,0,0,0deg) translateY(20px);}
+    21% {transform: rotate(-10deg) rotate3d(1,0,0,0deg) translateY(20px);}
+    100% {transform: rotate(-0deg) rotate3d(1,1,1,360deg) translateY(0px);}
   }
-  .logo-16, .logo-64 {
-    opacity: .8;
-    mix-blend-mode: difference;
+  .logo.varial-kickflip {
+    animation: varial-kickflip 1s cubic-bezier(.34,-0.3,.67,1.25);
   }
-  .logo-a {
-    animation: logo-a 30s ease-in-out;
+  @keyframes varial-kickflip {
+    0% {transform: rotate(-0deg) translateY(0px);}
+    20% {transform: rotate(-10deg) rotate3d(1,0,0,0deg) translateY(20px);}
+    21% {transform: rotate(-10deg) rotate3d(1,0,0,0deg) translateY(20px);}
+    100% {transform: rotate(-0deg) rotate3d(1,1,1,360deg) translateY(0px);}
   }
-  @keyframes logo-a {
-    0% { transform: scale(0); }
-    2% { transform: scale(0); }
-    3% { transform: scale(1); }
+  .logo.laserflip {
+    animation: laserflip 1.6s cubic-bezier(.34,-0.3,.67,1.25);
   }
-
-  .logo-r {
-    transform: translateX(-16px);
-    animation: logo-r 30s ease-in-out;
+  @keyframes laserflip {
+    0% {transform: rotate(-0deg) translateY(0px);}
+    20% {transform: rotate(-10deg) rotate3d(0,1,0,360deg) translateY(20px);}
+    21% {transform: rotate(-10deg) rotate3d(0,1,0,360deg) translateY(20px);}
+    100% {transform: rotate(-360deg) rotate3d(0,1,1,0deg) translateY(0px);}
   }
-  @keyframes logo-r {
-    0% { transform: scale(0) translateX(-64px); }
-    2.5% { transform: scale(0) translateX(-64px); }
-    3.5% { transform: scale(1) translateX(-64px); }
+  .logo.nollie-heel-slide {
+    animation: nollie-heel-slide 2s cubic-bezier(.34,-0.3,.67,1.25);
+    transform-origin: left;
   }
-  .logo-o {
-    transform: translateX(-32px);
-    animation: logo-o 30s ease-in-out;
-  }
-  @keyframes logo-o {
-    0% { transform: scale(0) translateX(-128px); }
-    3% { transform: scale(0) translateX(-128px); }
-    4% { transform: scale(1) translateX(-128px); }
-  }
-  .logo-n {
-    transform: translateX(-48px);
-    animation: logo-n 30s ease-in-out;
-  }
-  @keyframes logo-n {
-    0% { transform: scale(0) translateX(-192px); }
-    3.5% { transform: scale(0) translateX(-192px); }
-    4.5% { transform: scale(1) translateX(-192px); }
-  }
-  .logo-i {
-    transform: translateX(-48px);
-    animation: logo-i 30s ease-in-out;
-  }
-  @keyframes logo-i {
-    0% { transform: scale(0) translateX(-208px); }
-    3.5% { transform: scale(0) translateX(-208px); }
-    4.5% { transform: scale(1) translateX(-208px); }
-  }
-  .logo-dot-i {
-    transform: translate(-64px, -52px);
-    animation: logo-dot-i 30s ease-in-out;
-  }
-  @keyframes logo-dot-i {
-    0% { transform: scale(0) translate(-248px, -24px); }
-    3.5% { transform: scale(0) translate(-248px, -24px); }
-    4.5% { transform: scale(1) translate(-248px, -24px); }
-  }
-  .logo-dot {
-    transform: translateX(-64px);
-    animation: logo-dot 30s ease-in-out;
-  }
-  @keyframes logo-dot {
-    0% { transform: scale(0) translate(-264px, -24px); }
-    4% { transform: scale(0) translate(-264px, -24px); }
-    5% { transform: scale(1) translate(-264px, -24px); }
-  }
-  .logo-c {
-    transform: translateX(-80px);
-    animation: logo-c 30s ease-in-out;
-  }
-  @keyframes logo-c {
-    0% { transform: scale(0) translateX(-304px); }
-    4.5% { transform: scale(0) translateX(-304px); }
-    5.5% { transform: scale(1) translateX(-304px); }
-  }
-  .logo-co {
-    transform: translateX(-96px);
-    animation: logo-co 30s ease-in-out;
-  }
-  @keyframes logo-co {
-    0% { transform: scale(0) translateX(-368px); }
-    5% { transform: scale(0) translateX(-368px); }
-    6% { transform: scale(1) translateX(-368px); }
+  @keyframes nollie-heel-slide {
+    0% {transform: rotate(0deg) translateY(0px);}
+    10% {transform: rotate(5deg) translateY(10px);}
+    11% {transform: rotate(5deg) rotate3d(0,0,0,0deg) translateY(10px);}
+    30% {transform: rotate(-40deg) rotate3d(1,1,0,40deg) translateY(-10px);}
+    77% {transform: rotate(-32deg) rotate3d(1,1,0,40deg) translateY(-15px);}
+    80% {transform: rotate(-40deg) rotate3d(1,1,0,40deg) translateY(-15px);}
+    100% {transform: rotate(0deg) rotate3d(0,0,0,0deg) translateY(0px);}
   }
 
 </style>
