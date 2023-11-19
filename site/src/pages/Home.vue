@@ -77,9 +77,27 @@ const doTrick = () => {
     cursor: pointer;
   }
   .logo-svg {
-    width: 100%;
-    min-height: 16px;
-    max-height: 96px;
+    height: 96px;
+  }
+  @media (max-width: 400px) {
+    .logo-svg {
+      height: 64px;
+    }    
+  }
+  @media (max-width: 300px) {
+    .logo-svg {
+      height: 48px;
+    }    
+  }
+  @media (max-width: 200px) {
+    .logo-svg {
+      height: 32px;
+    }    
+  }
+  @media (max-width: 140px) {
+    .logo-svg {
+      height: 16px;
+    }    
   }
 /*  .soon {
     transform: translateY(-10px);
